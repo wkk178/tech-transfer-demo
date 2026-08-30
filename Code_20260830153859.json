@@ -1,0 +1,119 @@
+{
+  "siteTitle": "未来科学城 - 科技成果转化对接平台",
+  "nav": ["平台大厅", "高校端", "央企端", "管委会"],
+  "footer": "© 2026 协同生态",
+  "platformHall": {
+    "welcome": "欢迎进入协同转化生态",
+    "stats": [
+      { "label": "入驻央企需求", "value": "132 项" },
+      { "label": "可转化成果", "value": "391 项" },
+      { "label": "中试基金规模", "value": "50 亿元" },
+      { "label": "成功对接项目", "value": "45 个" }
+    ],
+    "news": [
+      { "title": "《关于设立科技成果转化中试风险补偿基金的通知》", "date": "今天" },
+      { "title": "“校-央-政”三方协同创新机制2.0版正式发布", "date": "3天前" }
+    ]
+  },
+  "universityEnd": {
+    "publishForm": {
+      "fields": {
+        "name": "成果名称",
+        "maturity": "成熟度",
+        "maturityOptions": ["实验室阶段", "中试阶段", "具备产业化条件"],
+        "scenario": "应用场景说明"
+      },
+      "submitButton": "提交发布"
+    },
+    "matchedDemands": [
+      {
+        "name": "航空铝材残余应力控制技术",
+        "field": "先进制造",
+        "target": "某材料研究院",
+        "investment": "500万",
+        "action": "发起意向"
+      },
+      {
+        "name": "柔性直流供电关键技术",
+        "field": "能源电力",
+        "target": "某电网央企",
+        "investment": "面议",
+        "action": "发起意向"
+      },
+      {
+        "name": "6G通信低延迟算法优化",
+        "field": "数字通信",
+        "target": "某通信央企",
+        "investment": "200万",
+        "action": "发起意向"
+      },
+      {
+        "name": "新型航空发动机叶片涂层",
+        "field": "航空航天",
+        "target": "某航天集团",
+        "investment": "1000万",
+        "action": "发起意向"
+      }
+    ]
+  },
+  "enterpriseEnd": {
+    "publishForm": {
+      "fields": {
+        "title": "需求命题",
+        "budget": "拟投入资金 (万元)",
+        "requirements": "核心技术指标要求"
+      },
+      "submitButton": "发布榜单"
+    },
+    "recommendedAchievements": [
+      {
+        "name": "纳秒级暂态精细化仿真算法",
+        "level": "国际领先",
+        "source": "某重点高校",
+        "ipr": "发明专利12项",
+        "action": "技术对接"
+      },
+      {
+        "name": "切缝翘曲法应力测试一体机",
+        "level": "首台套",
+        "source": "某顶尖高校",
+        "ipr": "PCT国际专利",
+        "action": "技术对接"
+      },
+      {
+        "name": "高并发边缘计算中间件",
+        "level": "实验室验证",
+        "source": "某部属高校",
+        "ipr": "软著5项",
+        "action": "技术对接"
+      }
+    ]
+  },
+  "governmentDashboard": {
+    "title": "全流程对接监控",
+    "columns": ["协同项目名称", "供给方(高校)", "需求方(央企)", "状态/进度", "管委会介入"],
+    "projects": [
+      {
+        "name": "柔性直流仿真验证",
+        "supplier": "某重点高校",
+        "demander": "某电网央企",
+        "status": "资金流已匹配\n中试阶段",
+        "actions": ["指派专员", "匹配政策"]
+      },
+      {
+        "name": "航空材料联合实验室",
+        "supplier": "某顶尖高校",
+        "demander": "某材料研究院",
+        "status": "政策/知识产权协同\n产业化落地",
+        "actions": ["指派专员", "匹配政策"]
+      },
+      {
+        "name": "6G算法验证项目",
+        "supplier": "某部属高校",
+        "demander": "某通信央企",
+        "status": "人才流配置中\n立项确权",
+        "actions": ["指派专员", "匹配政策"]
+      }
+    ]
+  }
+}
