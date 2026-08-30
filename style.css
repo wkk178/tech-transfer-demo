@@ -1,0 +1,50 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* 侧边栏样式 */
+.sidebar {
+    box-shadow: 2px 0 5px rgba(0,0,0,0.05);
+}
+.sidebar .nav-link {
+    border-radius: 8px;
+    padding: 10px 15px;
+    transition: all 0.2s ease-in-out;
+}
+.sidebar .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+.sidebar .nav-link.active {
+    background-color: #0d6efd;
+    font-weight: 600;
+}
+
+/* 主体背景 */
+.main-content {
+    background-color: #f4f6f9;
+}
+
+/* 卡片样式 */
+.card {
+    border-radius: 12px;
+}
+
+/* 动画效果：平滑出现 */
+.fade-in {
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 隐藏无用的板块 */
+.d-none {
+    display: none !important;
+}
+
+/* 列表项搜索隐藏 */
+.d-none-search {
+    display: none !important;
+}
