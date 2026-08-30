@@ -1,16 +1,32 @@
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: #f4f6f9;
 }
 
-/* 侧边栏样式 */
+/* ================= 侧边栏 / 导航栏样式 ================= */
 .sidebar {
-    box-shadow: 2px 0 5px rgba(0,0,0,0.05);
+    width: 100%;
+    z-index: 1000;
 }
+
+/* 移动端导航横向滑动优化 */
+.sidebar-nav {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch; /* 提升 iOS 滑动体验 */
+    scrollbar-width: none; /* Firefox 隐藏滚动条 */
+}
+.sidebar-nav::-webkit-scrollbar {
+    display: none; /* Chrome/Safari 隐藏滚动条 */
+}
+
 .sidebar .nav-link {
     border-radius: 8px;
-    padding: 10px 15px;
+    padding: 8px 15px;
     transition: all 0.2s ease-in-out;
+    white-space: nowrap; /* 移动端防止文字换行 */
 }
+
 .sidebar .nav-link:hover {
     background-color: rgba(255, 255, 255, 0.1);
 }
@@ -19,32 +35,43 @@ body {
     font-weight: 600;
 }
 
-/* 主体背景 */
-.main-content {
-    background-color: #f4f6f9;
+/* ================= 媒体查询：PC端恢复左侧边栏 ================= */
+@media (min-width: 768px) {
+    .sidebar {
+        width: 260px !important;
+        height: 100vh;
+        position: sticky;
+        top: 0;
+    }
+    .sidebar-nav {
+        overflow-x: visible;
+        flex-wrap: wrap;
+    }
 }
 
-/* 卡片样式 */
+/* ================= 通用样式 ================= */
+.main-content {
+    background-color: #f4f6f9;
+    overflow-x: hidden;
+}
+
 .card {
     border-radius: 12px;
 }
 
-/* 动画效果：平滑出现 */
+/* 动画效果 */
 .fade-in {
     animation: fadeIn 0.4s ease-in-out;
 }
-
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* 隐藏无用的板块 */
 .d-none {
     display: none !important;
 }
 
-/* 列表项搜索隐藏 */
 .d-none-search {
     display: none !important;
 }
