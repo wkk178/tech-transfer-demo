@@ -13,18 +13,19 @@ body {
 .sidebar-nav {
     overflow-x: auto;
     flex-wrap: nowrap;
-    -webkit-overflow-scrolling: touch; /* 提升 iOS 滑动体验 */
-    scrollbar-width: none; /* Firefox 隐藏滚动条 */
+    -webkit-overflow-scrolling: touch; 
+    scrollbar-width: none; 
 }
 .sidebar-nav::-webkit-scrollbar {
-    display: none; /* Chrome/Safari 隐藏滚动条 */
+    display: none; 
 }
 
-.sidebar .nav-link {
+/* 强制导航文字不换行，绝对防止变成竖排 */
+.sidebar .nav-link, .sidebar-nav li {
     border-radius: 8px;
     padding: 8px 15px;
     transition: all 0.2s ease-in-out;
-    white-space: nowrap; /* 移动端防止文字换行 */
+    white-space: nowrap !important; 
 }
 
 .sidebar .nav-link:hover {
@@ -53,6 +54,9 @@ body {
 .main-content {
     background-color: #f4f6f9;
     overflow-x: hidden;
+    /* 核心修复：防止表格内容把 Flexbox 父容器撑爆 */
+    min-width: 0; 
+    width: 100%;
 }
 
 .card {
