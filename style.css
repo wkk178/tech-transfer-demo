@@ -4,78 +4,47 @@ body {
 }
 
 /* ================= 侧边栏 / 导航栏样式 ================= */
-.sidebar {
-    width: 100%;
-    z-index: 1000;
-}
+.sidebar { width: 100%; z-index: 1000; }
+.sidebar-nav { overflow-x: auto; flex-wrap: nowrap; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+.sidebar-nav::-webkit-scrollbar { display: none; }
+.sidebar .nav-link, .sidebar-nav li { border-radius: 8px; padding: 8px 15px; transition: all 0.2s ease-in-out; white-space: nowrap !important; }
+.sidebar .nav-link:hover { background-color: rgba(255, 255, 255, 0.1); }
+.sidebar .nav-link.active { background-color: #0d6efd; font-weight: 600; }
 
-/* 移动端导航横向滑动优化 */
-.sidebar-nav {
-    overflow-x: auto;
-    flex-wrap: nowrap;
-    -webkit-overflow-scrolling: touch; 
-    scrollbar-width: none; 
-}
-.sidebar-nav::-webkit-scrollbar {
-    display: none; 
-}
-
-/* 强制导航文字不换行，绝对防止变成竖排 */
-.sidebar .nav-link, .sidebar-nav li {
-    border-radius: 8px;
-    padding: 8px 15px;
-    transition: all 0.2s ease-in-out;
-    white-space: nowrap !important; 
-}
-
-.sidebar .nav-link:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-}
-.sidebar .nav-link.active {
-    background-color: #0d6efd;
-    font-weight: 600;
-}
-
-/* ================= 媒体查询：PC端恢复左侧边栏 ================= */
 @media (min-width: 768px) {
-    .sidebar {
-        width: 260px !important;
-        height: 100vh;
-        position: sticky;
-        top: 0;
-    }
-    .sidebar-nav {
-        overflow-x: visible;
-        flex-wrap: wrap;
-    }
+    .sidebar { width: 260px !important; height: 100vh; position: sticky; top: 0; }
+    .sidebar-nav { overflow-x: visible; flex-wrap: wrap; }
 }
 
-/* ================= 通用样式 ================= */
-.main-content {
-    background-color: #f4f6f9;
-    overflow-x: hidden;
-    /* 核心修复：防止表格内容把 Flexbox 父容器撑爆 */
-    min-width: 0; 
-    width: 100%;
-}
+/* ================= 通用与动画样式 ================= */
+.main-content { background-color: #f4f6f9; overflow-x: hidden; min-width: 0; width: 100%; }
+.card { border-radius: 12px; }
 
-.card {
-    border-radius: 12px;
-}
+/* 鼠标悬停卡片上浮 */
+.hover-lift { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+.hover-lift:hover { transform: translateY(-4px); box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important; }
 
-/* 动画效果 */
-.fade-in {
-    animation: fadeIn 0.4s ease-in-out;
-}
+/* 渐入动画 */
+.fade-in { animation: fadeIn 0.5s ease-in-out; }
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
+    from { opacity: 0; transform: translateY(15px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
-.d-none {
-    display: none !important;
+/* 呼吸动画 (左上角Logo) */
+.pulse-anim { display: inline-block; animation: pulse 2s infinite; }
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+    100% { transform: scale(1); opacity: 1; }
 }
 
-.d-none-search {
-    display: none !important;
+/* 实时动态消息行出场动画 */
+.feed-item-enter { animation: slideDown 0.4s ease-out forwards; }
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
+
+.d-none { display: none !important; }
+.d-none-search { display: none !important; }
