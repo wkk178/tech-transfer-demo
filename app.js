@@ -1,4 +1,4 @@
-// ================= 状态流转节点 =================
+// 状态流转节点 
 const STATUS_FLOW = [
     { name: "意向对接中", color: "bg-secondary", showLifeBar: false },
     { name: "智能匹配与概念验证", color: "bg-info", showLifeBar: false },
@@ -29,11 +29,11 @@ document.addEventListener('DOMContentLoaded', () => {
     renderDemands();
     renderAchievements();
     renderProjects();
-    initChart();       // 初始化 ECharts 图表
-    startLiveFeed();   // 启动实时动态模拟器
+    initChart();       
+    startLiveFeed();   
 });
 
-// ================= 渲染列表 (同上) =================
+
 function renderDemands() {
     const list = document.getElementById('uni-demand-list');
     list.innerHTML = '';
@@ -172,7 +172,7 @@ function showAIMatch(demandName) {
     }, 1500);
 }
 
-// ================= 其他表单与状态逻辑 =================
+
 function publishAchievement() {
     const title = document.getElementById('uni-form-title').value;
     const level = document.getElementById('uni-form-level').value;
@@ -223,7 +223,7 @@ function advanceStatus(projectIndex) {
     }
 }
 
-// ================= ECharts 图表初始化 =================
+
 function initChart() {
     var chartDom = document.getElementById('industryChart');
     if(chartDom) {
@@ -246,12 +246,12 @@ function initChart() {
             }]
         };
         myChart.setOption(option);
-        // 自适应屏幕大小
+        
         window.addEventListener('resize', function() { myChart.resize(); });
     }
 }
 
-// ================= 实时动态模拟器 =================
+
 function startLiveFeed() {
     const feedList = document.getElementById('live-feed-list');
     const messages = [
@@ -262,7 +262,7 @@ function startLiveFeed() {
         "【AI系统】自动为新入库材料成果打标并推送"
     ];
     
-    // 初始生成几条
+   
     for(let i=0; i<3; i++) { addFeedItem(feedList, messages[Math.floor(Math.random() * messages.length)]); }
 
     // 每隔 4 秒随机插入一条新动态
@@ -279,19 +279,19 @@ function addFeedItem(listElement, text) {
     
     listElement.insertBefore(li, listElement.firstChild);
     
-    // 保持列表最多只有 5 条，防止无限增加撑爆内存
+    
     if(listElement.children.length > 5) {
         listElement.removeChild(listElement.lastChild);
     }
 }
 
-// 基础辅助函数
+
 function switchView(viewId, element) {
     document.querySelectorAll('.view-section').forEach(el => el.classList.add('d-none'));
     document.getElementById('view-' + viewId).classList.remove('d-none');
     document.querySelectorAll('.sidebar .nav-link').forEach(el => { el.classList.remove('active'); el.classList.add('text-white'); });
     element.classList.add('active'); element.classList.remove('text-white');
-    // 如果切回首页，重绘一下图表防止宽度挤压
+  
     if(viewId === 'home') { setTimeout(() => { echarts.getInstanceByDom(document.getElementById('industryChart')).resize(); }, 100); }
 }
 function filterList(inputElement, listId) {

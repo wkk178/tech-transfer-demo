@@ -3,7 +3,6 @@ body {
     background-color: #f4f6f9;
 }
 
-/* ================= 侧边栏 / 导航栏样式 ================= */
 .sidebar { width: 100%; z-index: 1000; }
 .sidebar-nav { overflow-x: auto; flex-wrap: nowrap; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
 .sidebar-nav::-webkit-scrollbar { display: none; }
@@ -16,22 +15,22 @@ body {
     .sidebar-nav { overflow-x: visible; flex-wrap: wrap; }
 }
 
-/* ================= 通用与动画样式 ================= */
+
 .main-content { background-color: #f4f6f9; overflow-x: hidden; min-width: 0; width: 100%; }
 .card { border-radius: 12px; }
 
-/* 鼠标悬停卡片上浮 */
+
 .hover-lift { transition: transform 0.2s ease, box-shadow 0.2s ease; }
 .hover-lift:hover { transform: translateY(-4px); box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important; }
 
-/* 渐入动画 */
+
 .fade-in { animation: fadeIn 0.5s ease-in-out; }
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(15px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* 呼吸动画 (左上角Logo) */
+
 .pulse-anim { display: inline-block; animation: pulse 2s infinite; }
 @keyframes pulse {
     0% { transform: scale(1); opacity: 1; }
@@ -39,7 +38,7 @@ body {
     100% { transform: scale(1); opacity: 1; }
 }
 
-/* 实时动态消息行出场动画 */
+
 .feed-item-enter { animation: slideDown 0.4s ease-out forwards; }
 @keyframes slideDown {
     from { opacity: 0; transform: translateY(-20px); }
