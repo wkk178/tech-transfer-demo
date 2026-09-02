@@ -6,13 +6,11 @@
     <title>产业科创成果智能匹配与孵化平台</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <!-- 引入 ECharts 图表库引擎 -->
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-light">
 
-    <!-- Toast 提示框容器 -->
     <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1055;">
         <div id="liveToast" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="d-flex">
@@ -22,12 +20,15 @@
         </div>
     </div>
 
-    <!-- AI 智能匹配弹窗 -->
+    
     <div class="modal fade" id="aiMatchModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content border-0 shadow-lg">
                 <div class="modal-header bg-primary text-white border-0">
                     <h5 class="modal-title fw-bold"><i class="bi bi-cpu-fill"></i> AI 成果智能匹配引擎</h5>
+                    <div class="ms-auto me-2 d-none d-md-block">
+                        <span class="badge text-bg-light text-primary border border-primary-subtle"><i class="bi bi-diagram-3 me-1"></i>NLP 语义匹配 + 知识图谱</span>
+                    </div>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body bg-light position-relative" style="min-height: 250px;">
@@ -42,18 +43,22 @@
                     <div id="ai-match-container">
                         <h6 class="fw-bold text-primary mb-3"> 智能匹配推荐 TOP 3</h6>
                         <div id="ai-match-results" class="row g-3">
-                            <!-- JS 动态注入匹配结果 -->
                         </div>
+                        <div class="mt-3 d-flex align-items-center gap-2 flex-wrap">
+                            <button class="btn btn-outline-primary btn-sm" id="btn-kg-toggle" onclick="toggleKG()"><i class="bi bi-diagram-3 me-1"></i> 查看匹配知识图谱</button>
+                            <small class="text-muted">由知识图谱 + TF-IDF 语义相似度实时计算，非预设数据</small>
+                        </div>
+                        <div id="kg-container" class="d-none mt-3 border rounded bg-white p-2" style="height: 280px;"></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 核心布局 -->
+  
     <div class="d-flex flex-column flex-md-row" style="min-height: 100vh;">
         
-        <!-- 侧边栏 -->
+      
         <div class="sidebar bg-dark text-white p-3 d-flex flex-md-column shadow">
             <div class="sidebar-header border-bottom border-secondary mb-md-3 pb-md-3 me-3 me-md-0 d-flex align-items-center justify-content-center">
                 <h5 class="fw-bold mb-0 text-nowrap text-center">
@@ -68,10 +73,10 @@
             </ul>
         </div>
 
-        <!-- 右侧主体内容 -->
+    
         <div class="flex-grow-1 p-3 p-md-4 main-content w-100">
             
-            <!-- 1. 首页大厅 (全面丰富化) -->
+            <!-- 1. 首页大厅  -->
             <div id="view-home" class="view-section fade-in">
                 <h4 class="mb-4 fw-bold"><i class="bi bi-grid-fill text-primary me-2"></i>欢迎进入智能孵化生态</h4>
                 
@@ -83,7 +88,7 @@
                     <div class="col-6 col-md-3"><div class="card bg-info text-white border-0 shadow-sm h-100 hover-lift"><div class="card-body p-3"><h6 class="text-white-50 small">成功转化项目</h6><h3 class="mb-0">45 <small class="fs-6">个</small></h3></div></div></div>
                 </div>
 
-                <!-- 新增：数据可视化图表与实时动态 -->
+                <!-- 数据可视化图表与实时动态 -->
                 <div class="row g-3">
                     <div class="col-12 col-xl-7">
                         <div class="card shadow-sm border-0 h-100">
@@ -101,7 +106,7 @@
                             </div>
                             <div class="card-body p-0" style="height: 280px; overflow: hidden; position: relative;">
                                 <ul class="list-group list-group-flush" id="live-feed-list" style="position: absolute; width: 100%; transition: top 0.5s;">
-                                    <!-- JS 动态循环注入 -->
+                                 
                                 </ul>
                             </div>
                         </div>
@@ -200,6 +205,7 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="matching.js"></script>
     <script src="app.js"></script>
 </body>
 </html>

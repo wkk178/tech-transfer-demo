@@ -120,28 +120,14 @@ function showAIMatch(demandName) {
     new bootstrap.Modal(document.getElementById('aiMatchModal')).show();
     container.classList.add('d-none');
     loader.classList.remove('d-none');
+    const kgBox = document.getElementById('kg-container');
+    if (kgBox) { kgBox.classList.add('d-none'); }
 
     setTimeout(() => {
-        let dynamicData = [];
-        if (demandName.includes("铝材") || demandName.includes("制造")) {
-            dynamicData = [
-                { name: "高强铝合金形变热处理技术", uni: "北京科技大学", score: 96, reason: "残余应力控制模型完全匹配航空制造需求，已有实验室初步数据支持。" },
-                { name: "特种轻合金精密成型工艺", uni: "北京航空航天大学", score: 85, reason: "应用场景高度重合，但目前处于概念验证阶段，需要中试平台支撑。" },
-                { name: "航空级材料超声无损检测", uni: "北京理工大学", score: 78, reason: "检测环节相关，可作为质检配套技术协同孵化。" }
-            ];
-        } else if (demandName.includes("柔性直流") || demandName.includes("电")) {
-            dynamicData = [
-                { name: "纳秒级暂态精细化仿真算法", uni: "华北电力大学", score: 98, reason: "底层仿真逻辑高度契合，重点实验室已具备半实物仿真硬件环境。" },
-                { name: "高频电磁暂态抑制装置", uni: "清华大学", score: 82, reason: "硬件架构符合国家电网标准，资金需求较小，可作为备选降本方案。" },
-                { name: "直流电网多端协同控制模块", uni: "北京交通大学", score: 75, reason: "控制策略具备借鉴意义，需技术经理人进一步技术拆解匹配。" }
-            ];
-        } else {
-            dynamicData = [
-                { name: "多模态行业大模型底座", uni: "北京邮电大学", score: 92, reason: "通用算法底座，可跨界进行二次开发以应用于该特定的弱网环境通信。" },
-                { name: "边缘计算节点优化方案", uni: "北京交通大学", score: 88, reason: "符合低延迟传输要求，团队具备央企联合攻关合作经验。" },
-                { name: "低轨卫星协同路由算法", uni: "北京航空航天大学", score: 81, reason: "通信场景关联，属于未来布局方向，建议纳入早期孵化库。" }
-            ];
-        }
+        // 调用真实 NLP + 知识图谱引擎实时计算匹配结果（不再是预设数据）
+        const result = (typeof Matching !== 'undefined') ? Matching.computeMatch(demandName) : { top: [] };
+        window.__lastMatch = result;
+        const dynamicData = result.top || [];
 
         resultBox.innerHTML = '';
         dynamicData.forEach((item, idx) => {
@@ -172,6 +158,15 @@ function showAIMatch(demandName) {
     }, 1500);
 }
 
+// 在匹配弹窗中展示需求—领域—成果—知产 关联知识图谱
+function toggleKG() {
+    const kgBox = document.getElementById('kg-container');
+    if (!kgBox) return;
+    if (!window.__lastMatch) { showToast('请先执行一次智能测算'); return; }
+    kgBox.classList.remove('d-none');
+    Matching.renderKG(kgBox, window.__lastMatch.requirement, window.__lastMatch.top);
+}
+
 
 function publishAchievement() {
     const title = document.getElementById('uni-form-title').value;
@@ -184,6 +179,17 @@ function publishAchievement() {
         let aiTag = "【综合类·成果】";
         if (title.includes("算法") || title.includes("模型")) aiTag = "【数字通信·软成果】";
         if (title.includes("材料") || title.includes("电池")) aiTag = "【先进制造·新材料】";
+        // 同步写入知识图谱，使新成果立即参与后续智能匹配
+        if (typeof Matching !== 'undefined') {
+            Matching.registerAchievement({
+                name: title,
+                field: Matching.guessField(title),
+                keywords: Matching.tokenize(title),
+                maturity: level,
+                ip: '评估中',
+                source: '当前入驻高校'
+            });
+        }
         actualData.recommendedAchievements.unshift({ name: title, level: level, source: "当前入驻高校", ipr: "评估中", clusterTag: aiTag });
         renderAchievements();
         showToast(`🎉 发布成功！大模型已自动打标为 ${aiTag}`);
@@ -202,6 +208,18 @@ function publishDemand() {
     setTimeout(() => {
         let aiTag = "【产业需求·综合】";
         if (title.includes("电池") || title.includes("电")) aiTag = "【能源电力·重点攻坚】";
+        // 同步写入知识图谱，使本需求立即可被检索与匹配
+        if (typeof Matching !== 'undefined') {
+            Matching.registerDemand({
+                name: title,
+                field: Matching.guessField(title),
+                enterprise: '当前入驻央企',
+                budget: budget || '面议',
+                keywords: Matching.tokenize(title),
+                stage: '意向对接中',
+                tags: [aiTag]
+            });
+        }
         actualData.matchedDemands.unshift({ name: title, field: "AI解析领域", target: "当前入驻央企", investment: budget || "面议", clusterTag: aiTag });
         renderDemands();
         showToast(` 需求发布成功！AI已解析核心痛点，正在全网寻源。`);
